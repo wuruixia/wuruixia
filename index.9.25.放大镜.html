@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+</head>
+<style>
+	.small,.big{
+		width: 400px;
+		height: 400px;
+		float: left;
+        margin-left: 10px;
+        overflow: hidden;
+        position: relative;
+	}
+	.small img{
+		width: 100%;
+		height: 100%;
+	}
+	.big img{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.zhe{
+		width: 150px;
+		height: 150px;
+		background: rgba(255, 255, 255, 0.8);
+		position: absolute;
+		top: 0;
+		left: 0;
+		
+	}
+	.opacity{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: move;
+	}
+</style>
+<body>
+   <div class="small">
+    <span class="zhe"></span>
+  	 <img src="../html/吴瑞霞天猫/img/41.jpg" alt="">
+  	 <div class="opacity"></div>
+  </div>
+  <div class="big">
+  	<img src="../html/吴瑞霞天猫/img/41.jpg" alt="">
+  </div>
+ 
+	<script>
+		window.addEventListener('load',function(){
+			let sm=document.querySelector('.small');
+			console.log(sm)
+			let big=document.querySelector('.big');
+			let zhe=document.querySelector('.zhe');
+			let im=big.querySelector('img');
+			console.log(im)
+            let sw=sm.offsetWidth,
+                sh=sm.offsetHeight,
+                zw=zhe.offsetWidth,
+                zh=zhe.offsetHeight,
+                bw=big.offsetWidth,
+               bh=big.offsetHeight,
+                iw=im.offsetWidth,
+               ih=im.offsetHeight;
+
+			// let bili=im.offsetWidth/parseInt(getComputedStyle(sm,null).width);
+            sm.onmousemove=function(e){
+            	let x=e.offsetX-zw/2,y=e.offsetY-zh/2;
+            	if(x>=sw-zw){
+                   x=sw-zw;
+            	}
+            	if(x<=0){
+            		x=0;
+            	}
+                if(y>=sh-zh){
+                   y=sh-zh;
+            	}
+            	if(y<=0){
+            		y=0;
+            	}
+            	zhe.style.left=x+'px';
+            	zhe.style.top=y+'px';
+            	im.style.width=sw*bw/zw+'px';
+            	im.style.height=sh*bh/zh+'px';
+                im.style.left=`${-x*sw/zw}px`;
+                im.style.top=`${-y*sh/zh}px`;
+
+
+            }
+
+
+
+
+		})
+	</script>
+</body>
+</html>
